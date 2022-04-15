@@ -1,0 +1,35 @@
+<div>
+  <div *ngIf="currentTask.id" class="edit-form">
+    <h4>Task</h4>
+    <form>
+      <div class="form-group">
+        <label for="label">Label</label>
+        <input
+          type="text"
+          class="form-control"
+          id="label"
+          [(ngModel)]="currentTask.label"
+          name="label"
+        />
+      </div>
+    </form>
+    <div class="form-check form-switch" style="margin-top: 5px">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="currentTask.complete"
+             (change)="toggleEditable($event)" [checked]="currentTask.complete">&nbsp;
+      <span>{{currentTask.complete ? "Completed" : "Not Completed"}}</span>
+    </div>
+    <button
+      style="margin-top: 5px"
+      type="submit"
+      class="btn btn-primary"
+      (click)="updateTutorial()"
+    >
+      Update
+    </button>
+  </div>
+
+  <div *ngIf="!currentTask.id">
+    <br/>
+    <p>Cannot access this Task...</p>
+  </div>
+</div>

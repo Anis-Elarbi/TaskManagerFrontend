@@ -1,0 +1,41 @@
+<div class="container">
+  <h3 class="text-center mt-5 mb-5">List Of Tasks</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Complete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr
+      *ngFor="
+          let task of tasks
+            | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
+    >
+
+      <th scope="row">{{ task.id }}</th>
+      <td>{{ task.label }}</td>
+      <td>{{ task.complete }}</td>
+      <td><button class="btn btn-primary" (click)="details(task.id)">Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>

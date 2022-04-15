@@ -1,0 +1,24 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="label">Label</label>
+        <input
+          type="text"
+          class="form-control"
+          id="label"
+          required
+          [(ngModel)]="task.label"
+          name="label"
+        />
+      </div>
+
+      <button (click)="saveTask()" class="btn btn-primary" style="margin-top: 5px">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Task Added!</h4>
+      <button class="btn btn-success" (click)="newTask()">Add</button>
+    </div>
+  </div>
+</div>
