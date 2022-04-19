@@ -13,7 +13,6 @@ export class TasksComponent implements OnInit, OnDestroy {
   page: number = 1;
   count: number = 0;
   tableSize: number = 7;
-  tableSizes: any = [3, 6, 9, 12];
   tasks: Task[] = [];
   private subscriptions?: Subscription;
 
@@ -22,7 +21,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.fetchTasks();
+    this.retrieveTasks();
   }
 
   getRequestParams(page: any, pageSize: any): any {
@@ -43,34 +42,22 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   retrieveTasks(): void {
-    const params = this.getRequestParams(this.page, this.tableSizes);
+    const params = this.getRequestParams(this.page, this.tableSize);
     this.subscriptions = this.taskService.getAll(params)
       .subscribe(
         response => {
-          const {tasks, totalItems} = response;
           this.tasks = response['content'];
-          this.count = totalItems;
+          this.count = response['totalElements'];
         });
   }
 
   onTableDataChange(event: any) {
     this.page = event;
-    this.fetchTasks();
-  }
-
-
-  fetchTasks(): void {
-    this.subscriptions = this.taskService.getAll().subscribe(
-      (response) => {
-        this.tasks = response['content'];
-      }
-    );
+    this.retrieveTasks();
   }
 
   details(id: any) {
-
     this.router.navigate(['/tasks/', id])
-
   }
 
   ngOnDestroy(): void {

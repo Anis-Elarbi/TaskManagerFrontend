@@ -51,8 +51,9 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // @ts-ignore
-    this.saveSubscriptions.unsubscribe();
+    if (this.saveSubscriptions) {
+      this.saveSubscriptions.unsubscribe();
+    }
   }
 
 }
