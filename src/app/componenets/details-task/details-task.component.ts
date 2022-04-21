@@ -29,10 +29,10 @@ export class DetailsTaskComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // @ts-ignore
-    this.subscriptions = this.getTutorial(this.route.snapshot.params['id']);
+    this.subscriptions = this.getTask(this.route.snapshot.params['id']);
   }
 
-  getTutorial(id: string): void {
+  getTask(id: string): void {
     this.subscriptions =
       this.taskService.get(id)
         .subscribe(
@@ -42,7 +42,7 @@ export class DetailsTaskComponent implements OnInit, OnDestroy {
   }
 
 
-  updateTutorial(): void {
+  updateTask(): void {
     this.subscriptions = this.taskService.update(this.currentTask.id, this.currentTask)
       .subscribe(
         response => {
